@@ -13,12 +13,33 @@ public class MovementInputs : MonoBehaviour
 
     private Rigidbody2D _rb;
 
+    private CircleCollider2D _hb;
+
+    [SerializeField]
+    private float rotationSpeed;
+
     public float speed = 10f;
+
+    [HideInInspector]
+    public bool isFacingLeft;
+    [HideInInspector]
+    public bool isFacingDown;
+    [HideInInspector]
+    public bool isFacingUp;
+    [HideInInspector]
+    public bool isFacingRight;
 
     // Start is called before the first frame update
     void Start()
     {
+        Initialize();
+    }
+
+    virtual protected void Initialize()
+    {
         _rb = GetComponent<Rigidbody2D>();
+        _hb = GetComponent<CircleCollider2D>();
+
     }
 
     // Update is called once per frame
@@ -37,5 +58,6 @@ public class MovementInputs : MonoBehaviour
     private void FixedUpdate()
     {
         _rb.AddForce(new Vector2(_xMove, _yMove) * speed);
+
     }
 }
