@@ -10,9 +10,13 @@ public class EnemyController : MonoBehaviour
 
     public int maxHealth = 3;
     private int currentHealth;
+    public int damageAmount = 10;
+    private float damageCooldown = 3f;
+    private float nextDamageTime = 0f;
 
     void Start()
     {
+        transform.rotation = Quaternion.Euler(0f, 0f, 0f);
         player = GameObject.FindGameObjectWithTag("Player").transform;
         agent = GetComponent<NavMeshAgent>();
         agent.updateRotation = false;
@@ -32,6 +36,25 @@ public class EnemyController : MonoBehaviour
         if (player != null)
         {
             agent.SetDestination(player.position);
+        }
+    }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            if (Time.time >= nextDamageTime)
+            {
+                // Deal damage to the player
+                PlayerHealth playerHealth = collision.gameObject.GetComponent<PlayerHealth>();
+                if (playerHealth != null)
+                {
+                    playerHealth.TakeDamage(damageAmount);
+                }
+
+                // Set the next allowed damage time
+                nextDamageTime = Time.time + damageCooldown;
+            }
         }
     }
 
@@ -55,8 +78,7 @@ public class EnemyController : MonoBehaviour
     {
         // Trigger the enemy spawner to spawn a new enemy
         EnemySpawner.Instance.SpawnEnemy();
-        
-        
+
         // Add any death behavior (e.g., play death animation, spawn particles)
         Destroy(gameObject);
     }

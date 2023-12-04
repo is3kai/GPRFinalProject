@@ -46,6 +46,18 @@ public class MovementInputs : MonoBehaviour
     void Update()
     {
         CheckInput();
+
+        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mousePos.z = 0f; // Ensure the cursor is at the same z-coordinate as the character
+
+        // Calculate the direction from the character to the cursor
+        Vector3 direction = (mousePos - transform.position).normalized;
+
+        // Calculate the angle in degrees
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+
+        // Rotate the character to face the cursor
+        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
     }
 
 
