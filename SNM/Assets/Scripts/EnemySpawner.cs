@@ -23,7 +23,7 @@ public class EnemySpawner : MonoBehaviour
 
     void Start()
     {
-        SpawnEnemy();
+        SpawnerActivation();
     }
 
     public void SpawnEnemy()
@@ -50,6 +50,18 @@ public class EnemySpawner : MonoBehaviour
         if (enemyController != null)
         {
             
+        }
+    }
+    public void SpawnerActivation()
+    {
+        int minRange = 1;
+        int maxRange = 4;
+        int randInt = Random.Range(minRange, maxRange);
+
+        while(randInt > 0)
+        {
+            SpawnEnemy();
+            randInt--;
         }
     }
 }
