@@ -8,5 +8,6 @@ public class MenuBehavior : MonoBehaviour
    public void LoadLevel(int index)
     {
         SceneManager.LoadScene(index);
+        Time.timeScale = 1.0f;
     }
 }

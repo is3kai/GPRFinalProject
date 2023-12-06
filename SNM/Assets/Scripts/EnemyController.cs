@@ -11,7 +11,7 @@ public class EnemyController : MonoBehaviour
     public int maxHealth = 3;
     private int currentHealth;
     public int damageAmount = 10;
-    private float damageCooldown = 3f;
+    private float damageCooldown = 1f;
     private float nextDamageTime = 0f;
 
     void Start()

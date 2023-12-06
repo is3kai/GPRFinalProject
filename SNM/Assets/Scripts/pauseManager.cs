@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 public class PauseManager : MonoBehaviour
 {
     public GameObject pauseMenuUI;
+    public GameObject resumeMenuUI;
     public Button resumeButton;
     public Button menuButton;
     public Button quitButton;
@@ -20,6 +21,7 @@ public class PauseManager : MonoBehaviour
 
         // Hide the pause menu initially
         pauseMenuUI.SetActive(false);
+        resumeMenuUI.SetActive(true);
     }
 
     void Update()
@@ -39,21 +41,22 @@ public class PauseManager : MonoBehaviour
         Time.timeScale = 0f; // Pause the game
         isPaused = true;
         pauseMenuUI.SetActive(true);
+        resumeMenuUI.SetActive(false);
     }
 
-    void ResumeGame()
+    public void ResumeGame()
     {
         Time.timeScale = 1f; // Resume the game
         isPaused = false;
         pauseMenuUI.SetActive(false);
     }
 
-    void ReturntoMenu()
+    public void ReturntoMenu()
     {
         SceneManager.LoadScene(0);
     }
 
-    void QuitGame()
+    public void QuitGame()
     {
         Application.Quit();
     }
