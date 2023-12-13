@@ -77,8 +77,6 @@ public class EnemyController : MonoBehaviour
     void Die()
     {
         // Trigger the enemy spawner to spawn a new enemy
-        EnemySpawner.Instance.SpawnerActivation();
-
         // Add any death behavior (e.g., play death animation, spawn particles)
         Destroy(gameObject);
     }
